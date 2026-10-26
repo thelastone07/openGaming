@@ -2,7 +2,6 @@
 
 Free, open-source desktop board and card games to play with friends. One app, many games:
 one player hosts, the others join. First game: **Climb and Slither** (a Snakes and Ladders game, 2+ players).
-Easy to setup using Cloudflare.
 
 ## What it looks like
 
