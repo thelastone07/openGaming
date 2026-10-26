@@ -125,7 +125,7 @@ func _build() -> void:
 	side_card = PaperCard.new()
 	side_card.back_color = Tokens.DEEP_TEAL
 	side_card.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	side_card.custom_minimum_size = Vector2(250, 0)
+	side_card.custom_minimum_size = Vector2(280, 0)
 	_row.add_child(side_card)
 	var column: VBoxContainer = VBoxContainer.new()
 	column.add_theme_constant_override("separation", Tokens.SPACE_S)
@@ -370,8 +370,16 @@ func _rebuild_rows(view: Dictionary) -> void:
 		name_label.text = str(names.get(id, id))
 		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		name_label.clip_text = true
+		name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		name_label.custom_minimum_size.x = 0.0
 		row.add_child(name_label)
+		# Fixed width sized for the longest text, so "Start" -> "Square 100" never resizes the card
+		# (and with it the board).
 		var square: Label = Label.new()
+		square.text = "Square 100"
+		square.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		square.custom_minimum_size.x = square.get_minimum_size().x
+		square.text = ""
 		row.add_child(square)
 		_players_box.add_child(panel)
 		player_rows[id] = {"panel": panel, "square": square}
